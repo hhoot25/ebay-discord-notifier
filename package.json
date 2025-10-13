@@ -1,0 +1,24 @@
+{
+  "name": "ebay-discord-notifier",
+  "version": "1.0.0",
+  "description": "this is going to send a notification to your discord webhook when a new item is avaliable",
+  "main": "notifier.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhoot25/ebay-discord-notifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhoot25/ebay-discord-notifier/issues"
+  },
+  "homepage": "https://github.com/hhoot25/ebay-discord-notifier#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "node-fetch": "^3.3.2"
+  }
+}
