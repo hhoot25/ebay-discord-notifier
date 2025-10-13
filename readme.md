@@ -1,0 +1,1 @@
+this is going to send a notification to your discord webhook when a new item is avaliable
