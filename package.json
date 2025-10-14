@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "this is going to send a notification to your discord webhook when a new item is avaliable",
   "main": "notifier.js",
+  "type":"module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
