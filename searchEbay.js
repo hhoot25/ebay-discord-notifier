@@ -1,5 +1,5 @@
 
-import {SEARCH_TERM} from "./notifier.js";
+import {SEARCH_TERM} from "./main.js";
 
 
 const EBAY_SEARCH_URL = "https://api.ebay.com/buy/browse/v1/item_summary/search";
@@ -8,7 +8,7 @@ const EBAY_SEARCH_URL = "https://api.ebay.com/buy/browse/v1/item_summary/search"
 const seenItems = new Set();
 
 
-
+//return json of all items found
 async function searchEbayItems(token, query) {
    
   //creates ebay query with token access
@@ -27,6 +27,7 @@ async function searchEbayItems(token, query) {
 
 
 //main runs this one
+//returns
 export async function checkForNewListings(token) {
     try {
         const items = await searchEbayItems(token, SEARCH_TERM);
@@ -38,12 +39,13 @@ export async function checkForNewListings(token) {
             newOnes.forEach(item => seenItems.add(item.itemId));
             
             //log locally and send the Discord notification
-            console.log(`\n Found ${newOnes.length} new listing(s) for "${SEARCH_TERM}". Sending Discord alert...`);
-            ////await sendDiscordNotification(newOnes);
+            console.log(`\n Found ${newOnes.length} new listing(s) for "${SEARCH_TERM}". Sending to discord module`);
+            return newOnes;
 
         } else {
             //updated log message to reflect your timezone preference
             console.log(`\n No new listings found for "${SEARCH_TERM}" at ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/Chicago' })}`);
+            return [];
         }
     } catch (err) {
         console.error(" Error during listing check:", err.message);

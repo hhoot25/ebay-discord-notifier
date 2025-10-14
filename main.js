@@ -5,12 +5,14 @@ import querystring from "querystring"; //format url
 
 import {getEbayToken} from "./acquireToken.js"
 import {checkForNewListings} from "./searchEbay.js"
+import {sendDiscordNotification} from "./discordNotification.js"
+
 
 import dotenv from "dotenv"; //get env variables 
 dotenv.config();
 
 
-export const SEARCH_TERM = "greninja_gold_star_sealed";
+export const SEARCH_TERM = "pokemon";
 const CHECK_INTERVAL_MINUTES = .288;
 
 (async () => {
@@ -22,14 +24,18 @@ const CHECK_INTERVAL_MINUTES = .288;
     console.log(token);
 
     //first search 
-    await checkForNewListings(token);
-
+    //newOnes is json of returned item of only new items
+    //establishes only newest go in set to print
+    let newOnes = await checkForNewListings(token);
+    sendDiscordNotification(newOnes);
 
 
 
     //run every set amount of time
     setInterval(async () => {
-    await checkForNewListings(token);
+    newOnes = await checkForNewListings(token);
+    sendDiscordNotification(newOnes);
+
   }, CHECK_INTERVAL_MINUTES * 60 * 1000);
 
 })();
