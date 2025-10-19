@@ -12,11 +12,13 @@ const seenItems = new Set();
 async function searchEbayItems(token, query) {
    
   //creates ebay query with token access
-  const url = `${EBAY_SEARCH_URL}?q=${encodeURIComponent(query)}&limit=5&sort=newlyListed`;
+  const url = `${EBAY_SEARCH_URL}?q=${encodeURIComponent(query)}&limit=5&sort=newlyListed&filter=price:[200..1000]`;
 
 
   const res = await fetch(url, {
-    headers: { "Authorization": `Bearer ${token}` }
+    headers: { "Authorization": `Bearer ${token}`,
+                'X-EBAY-C-MARKETPLACE-ID': 'EBAY_US'
+    }
   });
 
   if (!res.ok) throw new Error(`Search failed: ${res.status}`);
